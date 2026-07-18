@@ -25,7 +25,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const res = await fetch("http://127.0.0.1:8000/projects");
+        const res = await fetch("https://ai-gov-7d7t.onrender.com/projects");
         const data = await res.json();
         setProjects(data);
       } catch (err) {
@@ -38,7 +38,11 @@ export default function Home() {
   }, []);
 
   if (loading) {
-    return <div className="flex h-screen items-center justify-center bg-gray-50 dark:bg-gray-900">Loading Data...</div>;
+    return (
+      <div className="flex h-screen items-center justify-center bg-gray-50 dark:bg-gray-900">
+        Loading Data...
+      </div>
+    );
   }
 
   return (
@@ -52,3 +56,4 @@ export default function Home() {
     </main>
   );
 }
+
