@@ -1,0 +1,40 @@
+{
+  "1": {
+    "project_id": 1,
+    "confidence_score": 60.5,
+    "label": "Construction activity detected",
+    "detail": "Heavy machinery and earthworks visible across 4 zones. Road surface incomplete on northern stretch.",
+    "bounding_box_image": "/static/images/project1_bbox.jpg",
+    "detected_objects": [
+      {"class": "heavy_machinery", "count": 3, "confidence": 0.91},
+      {"class": "earthwork_zone", "count": 4, "confidence": 0.87},
+      {"class": "road_surface_incomplete", "count": 1, "confidence": 0.78}
+    ],
+    "last_analyzed": "2025-07-10T08:00:00Z"
+  },
+  "2": {
+    "project_id": 2,
+    "confidence_score": 12.0,
+    "label": "No recent construction activity",
+    "detail": "Site shows no movement for over 180 days. Partial roofing structure detected but no workers or machinery visible.",
+    "bounding_box_image": "/static/images/project2_bbox.jpg",
+    "detected_objects": [
+      {"class": "partial_structure", "count": 1, "confidence": 0.88},
+      {"class": "bare_land", "count": 2, "confidence": 0.72}
+    ],
+    "last_analyzed": "2025-07-10T08:00:00Z"
+  },
+  "3": {
+    "project_id": 3,
+    "confidence_score": 98.2,
+    "label": "Completed structure confirmed",
+    "detail": "Roofing, walls, and surrounding compound fully visible. Pupils present in satellite imagery. No discrepancy detected.",
+    "bounding_box_image": "/static/images/project3_bbox.jpg",
+    "detected_objects": [
+      {"class": "completed_building", "count": 5, "confidence": 0.99},
+      {"class": "school_compound", "count": 1, "confidence": 0.97},
+      {"class": "human_activity", "count": 1, "confidence": 0.94}
+    ],
+    "last_analyzed": "2025-07-10T08:00:00Z"
+  }
+}

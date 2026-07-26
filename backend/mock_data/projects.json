@@ -3,27 +3,105 @@
     "id": 1,
     "name": "Lagos-Ibadan Expressway Expansion",
     "status": "Active",
-    "budget": "$150,000,000",
-    "location": [6.6111, 3.4245],
-    "ai_score": 85.5,
-    "whatsapp_status": "Community reports daily activity."
+    "sector": "Roads & Transport",
+    "description": "A major federal road rehabilitation and expansion project covering 127km of the Lagos-Ibadan expressway, one of Nigeria's busiest arterial roads.",
+    "location": {
+      "lat": 6.6111,
+      "lng": 3.4245,
+      "label": "Lagos State"
+    },
+    "budget": {
+      "official_ngn": 57000000000,
+      "official_usd": 150000000,
+      "disbursed_ngn": 38000000000,
+      "disbursed_usd": 100000000
+    },
+    "ai_analysis": {
+      "confidence_score": 60.5,
+      "label": "Construction activity detected",
+      "detail": "Heavy machinery and earthworks visible across 4 zones. Road surface incomplete on northern stretch.",
+      "bounding_box_image": "/static/images/project1_bbox.jpg",
+      "last_analyzed": "2025-07-10T08:00:00Z"
+    },
+    "whatsapp_reports": {
+      "count": 7,
+      "summary": "Community reports daily construction activity.",
+      "last_report": "2025-07-14T11:30:00Z"
+    },
+    "timeline": {
+      "start_date": "2023-01-15",
+      "expected_end": "2026-06-30",
+      "completion_pct": 62
+    }
   },
   {
     "id": 2,
     "name": "Kano Rural Hospital Facility",
     "status": "Abandoned",
-    "budget": "$5,000,000",
-    "location": [11.9964, 8.5167],
-    "ai_score": 12.0,
-    "whatsapp_status": "No activity seen in 6 months."
+    "sector": "Healthcare",
+    "description": "A primary healthcare centre commissioned to serve 80,000 rural residents in Kano State. Construction halted after contractor abandonment.",
+    "location": {
+      "lat": 11.9964,
+      "lng": 8.5167,
+      "label": "Kano State"
+    },
+    "budget": {
+      "official_ngn": 1900000000,
+      "official_usd": 5000000,
+      "disbursed_ngn": 1425000000,
+      "disbursed_usd": 3750000
+    },
+    "ai_analysis": {
+      "confidence_score": 12.0,
+      "label": "No recent construction activity",
+      "detail": "Site shows no movement for over 180 days. Partial roofing structure detected but no workers or machinery visible.",
+      "bounding_box_image": "/static/images/project2_bbox.jpg",
+      "last_analyzed": "2025-07-10T08:00:00Z"
+    },
+    "whatsapp_reports": {
+      "count": 3,
+      "summary": "No site activity seen in 6 months. Community residents report abandoned structure.",
+      "last_report": "2025-06-30T09:00:00Z"
+    },
+    "timeline": {
+      "start_date": "2022-05-01",
+      "expected_end": "2024-11-30",
+      "completion_pct": 35
+    }
   },
   {
     "id": 3,
-    "name": "Port Harcourt Primary School Reno",
+    "name": "Port Harcourt Primary School Renovation",
     "status": "Completed",
-    "budget": "$250,000",
-    "location": [4.8156, 7.0498],
-    "ai_score": 98.2,
-    "whatsapp_status": "School is fully operational."
+    "sector": "Education",
+    "description": "Full renovation of Rumuola Model Primary School including new classrooms, sanitation blocks, and solar-powered lighting. Project delivered on time.",
+    "location": {
+      "lat": 4.8156,
+      "lng": 7.0498,
+      "label": "Rivers State"
+    },
+    "budget": {
+      "official_ngn": 95000000,
+      "official_usd": 250000,
+      "disbursed_ngn": 95000000,
+      "disbursed_usd": 250000
+    },
+    "ai_analysis": {
+      "confidence_score": 98.2,
+      "label": "Completed structure confirmed",
+      "detail": "Roofing, walls, and surrounding compound fully visible. Pupils present in satellite imagery. No discrepancy detected.",
+      "bounding_box_image": "/static/images/project3_bbox.jpg",
+      "last_analyzed": "2025-07-10T08:00:00Z"
+    },
+    "whatsapp_reports": {
+      "count": 12,
+      "summary": "School is fully operational. Community confirms pupils are attending classes.",
+      "last_report": "2025-07-15T08:00:00Z"
+    },
+    "timeline": {
+      "start_date": "2023-09-01",
+      "expected_end": "2024-12-31",
+      "completion_pct": 100
+    }
   }
 ]

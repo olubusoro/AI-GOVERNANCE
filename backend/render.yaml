@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: couch-tracker-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    rootDir: backend
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: UPSTASH_REDIS_REST_URL
+        sync: false   # Set this in the Render dashboard after creating Upstash DB
+      - key: UPSTASH_REDIS_REST_TOKEN
+        sync: false   # Set this in the Render dashboard after creating Upstash DB
+      - key: TWILIO_ACCOUNT_SID
+        sync: false   # Set this manually in the Render dashboard
+      - key: TWILIO_AUTH_TOKEN
+        sync: false   # Set this manually in the Render dashboard
+      - key: TWILIO_WHATSAPP_FROM
+        value: "whatsapp:+14155238886"
+      - key: FRONTEND_URL
+        value: "https://couch-tracker.vercel.app"  # Update to your frontend URL
+    healthCheckPath: /health
