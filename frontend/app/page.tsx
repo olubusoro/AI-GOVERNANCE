@@ -3,52 +3,83 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import SidePanel from "@/components/SidePanel";
+import {
+  Project,
+  fetchProjects,
+  fetchProjectDetail,
+  fetchAiReport,
+} from "@/lib/api";
+import fallbackProjects from "@/data/fallback-projects.json";
 
 // MapView needs to be dynamically imported with SSR disabled because Leaflet requires the window object
 const MapView = dynamic(() => import("@/components/MapView"), { ssr: false });
 
-export interface Project {
-  id: number;
-  name: string;
-  status: string;
-  budget: string;
-  location: [number, number];
-  ai_score: number;
-  whatsapp_status: string;
-}
+const FALLBACK: Project[] = fallbackProjects as Project[];
 
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
+  const [offline, setOffline] = useState(false);
 
   useEffect(() => {
-    async function fetchProjects() {
+    async function loadProjects() {
       try {
-        const res = await fetch("http://127.0.0.1:8000/projects");
-        const data = await res.json();
-        setProjects(data);
+        setProjects(await fetchProjects());
       } catch (err) {
-        console.error("Failed to fetch projects", err);
+        console.warn("API unreachable, using bundled fallback data", err);
+        setProjects(FALLBACK);
+        setOffline(true);
       } finally {
         setLoading(false);
       }
     }
-    fetchProjects();
+    loadProjects();
   }, []);
 
+  async function handleSelectProject(project: Project) {
+    setSelectedProject(project);
+    // The list endpoint has no budget/timeline/detected_objects; hydrate from the
+    // detail + ai-report endpoints, falling back to bundled data if unreachable.
+    if (project.budget && project.ai_analysis.detected_objects) return;
+    try {
+      const [detail, report] = await Promise.all([
+        fetchProjectDetail(project.id),
+        fetchAiReport(project.id),
+      ]);
+      setSelectedProject({
+        ...detail,
+        ai_analysis: {
+          ...detail.ai_analysis,
+          detected_objects: report.detected_objects,
+        },
+      });
+    } catch {
+      const local = FALLBACK.find((p) => p.id === project.id);
+      if (local) setSelectedProject({ ...local, ...project });
+    }
+  }
+
   if (loading) {
-    return <div className="flex h-screen items-center justify-center bg-gray-50 dark:bg-gray-900">Loading Data...</div>;
+    return (
+      <div className="flex h-screen items-center justify-center bg-gray-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400">
+        Loading projects…
+      </div>
+    );
   }
 
   return (
-    <main className="flex h-screen w-screen overflow-hidden">
-      <div className="flex-1 h-full relative">
-        <MapView projects={projects} onSelectProject={setSelectedProject} />
-      </div>
-      <div className="w-[400px] h-full shadow-2xl z-10 flex-shrink-0 transition-transform duration-300 border-l border-gray-200 dark:border-gray-800">
-        <SidePanel project={selectedProject} />
-      </div>
+    <main className="relative h-screen w-screen overflow-hidden">
+      <MapView projects={projects} onSelectProject={handleSelectProject} />
+      <SidePanel
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
+      {offline && (
+        <div className="absolute bottom-4 left-4 z-20 rounded-full bg-amber-100 dark:bg-amber-900/60 border border-amber-300 dark:border-amber-700 px-3 py-1 text-xs text-amber-800 dark:text-amber-200 shadow">
+          Offline demo data
+        </div>
+      )}
     </main>
   );
 }
