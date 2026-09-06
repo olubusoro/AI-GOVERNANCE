@@ -179,11 +179,11 @@ def handle_inbound_message(body: str, from_number: str) -> str:
         project_id = parsed["project_id"]
         _save_session(from_number, project_id)
         reply = (
-            "👋 Welcome to the COUCH Infrastructure Tracker!\n\n"
+            "👋 Welcome to the Nigeria AI Governance Tracker!\n\n"
             f"You're checking on Project {project_id}.\n\n"
-            "Please reply with the current status:\n"
-            "1️⃣  Active — work is ongoing\n"
-            "2️⃣  Abandoned — no activity visible\n"
+            "Help us verify the current status of this project by replying:\n"
+            "1️⃣  Active — construction or work is ongoing\n"
+            "2️⃣  Abandoned — no visible activity\n"
             "3️⃣  Completed — project is finished\n\n"
             "Reply with 1, 2, or 3."
         )
@@ -212,19 +212,20 @@ def handle_inbound_message(body: str, from_number: str) -> str:
 
         reply = (
             f"✅ Report received! Status '{status_label}' logged for Project {project_id}.\n\n"
-            "Thank you for helping track this project. Your report contributes to "
-            "COUCH's real-time governance data.\n\n"
-            "🔗 View the dashboard: https://couch-tracker.onrender.com"
+            "Thank you for contributing. Your ground-truth report helps hold "
+            "government infrastructure projects accountable in real time.\n\n"
+            "🔗 View the live dashboard: https://ai-gov-7d7t.onrender.com"
         )
         return build_twiml_response(reply)
 
     # --- Unknown / unrecognised message ---
     reply = (
-        "👋 Hi! I'm the COUCH Infrastructure Tracker bot.\n\n"
-        "To check on a project, send a message like:\n"
-        "   'Project 102' or 'P1'\n\n"
-        "I'll ask you to confirm its current status. Together we keep "
-        "government projects accountable. 🇳🇬"
+        "👋 Hi! I'm the Nigeria AI Governance Tracker bot.\n\n"
+        "I help citizens monitor and verify the status of government "
+        "infrastructure projects using AI and crowdsourced reports.\n\n"
+        "To get started, send a project code, e.g.:\n"
+        "   'Project 1', 'Project 2', or 'P3'\n\n"
+        "Together we keep public projects accountable. 🇳🇬"
     )
     return build_twiml_response(reply)
 
